@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { DM_Sans, Playfair_Display } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import "./globals.css";
+import NavBar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ReactQueryProvider from "@/components/ReactQueryProvider";
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair-display",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -25,9 +34,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${dmSans.variable} ${playfairDisplay.variable} antialiased`}
       >
-        {children}
+        <ReactQueryProvider>
+          <NavBar />
+          {children}
+          <Footer />
+        </ReactQueryProvider>
+        <Toaster position="top-right" />
       </body>
     </html>
   );
