@@ -7,6 +7,14 @@ import { useProducts } from "@/hooks/useProducts";
 import type { Swiper as SwiperClass } from "swiper/types";
 import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+}
+
 const Testimonimals = () => {
   const { data, isLoading, error } = useProducts();
 
@@ -44,7 +52,6 @@ const Testimonimals = () => {
           modules={[Pagination]}
           pagination={{
             clickable: true,
-            // el: ".swiper-pagination",
             type: "bullets",
             dynamicBullets: true,
             dynamicMainBullets: 4,
@@ -63,7 +70,7 @@ const Testimonimals = () => {
             },
           }}
         >
-          {data.map((product: any) => (
+          {data.map((product: Product) => (
             <SwiperSlide key={product.id}>
               <div className="z-10 mb-12 flex h-[326px] flex-col items-center justify-center gap-4 rounded border border-[#E4E4E4] p-4 px-4 py-7 shadow-sm">
                 <Image
@@ -83,7 +90,7 @@ const Testimonimals = () => {
         <button
           className={`-translate-1/2 absolute left-2 top-[11rem] z-50 flex h-9 w-9 items-center justify-center rounded-full border p-4 transition lg:-left-5 lg:top-[10rem] ${isBeginning ? "border-[#C4C4C4] opacity-50" : "cursor-pointer border-[#434343]"}`}
           disabled={isBeginning}
-          onClick={goPrev} // optional
+          onClick={goPrev}
         >
           ❮
         </button>
